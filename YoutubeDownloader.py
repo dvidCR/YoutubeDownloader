@@ -1,3 +1,19 @@
+import subprocess
+import sys
+
+def instalar_pytube():
+    try:
+        # Intenta importar pytube para verificar si ya está instalado
+        print("Bienvenido a YoutubeDownloader v1.0")
+    except ImportError as e:
+        print(e)
+        install = input("¿Quieres instalar la libreria?(y/n):")
+        if install == "y" or "Y":
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "pytube"])
+            print("pytube instalado correctamente.")
+        else:
+            print("Para poder descargar algo necesitas descargar la libreria.")
+
 from pytube import YouTube
 import os
 
@@ -26,4 +42,5 @@ def main():
     descargar_video(url, output_path)
     
 if __name__ == "__main__":
+    instalar_pytube()
     main()
