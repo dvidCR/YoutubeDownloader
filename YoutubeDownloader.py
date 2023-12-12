@@ -33,17 +33,25 @@ def descargar_video(url, output_path):
         print(f"No se pudo descargar el video por {e}")
         
 def main():
-    print("Bienvenido a YoutubeDownloader v1.0")
-    url = input("Introduce la URL del video que quieras descargar: ")
-    file = input("En que carpeta lo quieres guardar: ")
+    while(True):
+        print("Bienvenido a YoutubeDownloader v1.0")
+        url = input("Introduce la URL del video que quieras descargar: ")
+        file = input("En que carpeta lo quieres guardar: ")
+        
+        project_directory = os.path.dirname(os.path.abspath(__file__))
+        output_path = os.path.join(project_directory, file)
+        
+        print(f"La carpeta del projecto es {project_directory}")
+        print(f"La carpeta donde se va a descargar el video es en {output_path}")
+        
+        descargar_video(url, output_path)
+        
+        os.system("pause")
     
-    project_directory = os.path.dirname(os.path.abspath(__file__))
-    output_path = os.path.join(project_directory, file)
-    
-    print(f"La carpeta del projecto es {project_directory}")
-    print(f"La carpeta donde se va a descargar el video es en {output_path}")
-    
-    descargar_video(url, output_path)
+        exit = input("¿Quieres salir de la aplicacion?(y/n): ")
+        
+        if exit == "y" or "Y":
+            return False
     
 if __name__ == "__main__":
     instalar_pytube()
