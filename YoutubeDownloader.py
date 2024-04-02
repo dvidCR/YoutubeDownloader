@@ -18,31 +18,36 @@ def instalar_api():
             print("Para poder descargar algo necesitas descargar la libreria.")    
     return "yes"
 
-if instalar_api() == "yes":
-    from pytube import YouTube, Playlist
-    from moviepy.editor import VideoFileClip
-
 def quitar_caracteres(title):
     name = title.replace('/', '')
     name = name.replace("'", '')
+    name = name.replace('"', '')
+    name = name.replace("|", '')
+    name = name.replace(".", '')
+    name = name.replace(":", '')
+    name = name.replace(",", '')
     return name
     
 def descargar_audio(url, output_path):
+    os.system("cls")
     try:
         yt = YouTube(url)
-        print(f"Descargando el video {yt.title}...")
+        title = quitar_caracteres(yt.title)
+        print(f"Descargando el audio {title}...")
         video = yt.streams.filter(file_extension = "mp4").first()
         video.download(output_path = output_path)
-        title = quitar_caracteres(yt.title)
         mp4_file = os.path.join(output_path, f'{title}.{video.subtype}')
         mp3_file = os.path.join(output_path, f'{title}.mp3')
-        VideoFileClip(mp4_file).audio.write_audiofile(mp3_file)
+        audio = VideoFileClip(mp4_file)
+        audio.audio.write_audiofile(mp3_file)
+        audio.close()
         os.remove(mp4_file)
         print(f"{yt.title} descargado exitosamente")
     except Exception as e:
         print(f"No se pudo descargar el audio por {e}")
 
 def descargar_video(url, output_path):
+    os.system("cls")
     try:
         yt = YouTube(url)
         print(f"Descargando el video {yt.title}...")
@@ -55,6 +60,7 @@ def descargar_video(url, output_path):
         print(f"No se pudo descargar el video por {e}")
         
 def descargar_playlist(url, output_path):
+    os.system("cls")
     try:
         p = Playlist(url)
         print(f"Descargando los videos de la playlist {p.title}")
@@ -66,6 +72,7 @@ def descargar_playlist(url, output_path):
         
 def main():
     while(True):
+        os.system("cls")
         print("Bienvenido a YoutubeDownloader v1.0")
         op = int(input(("\nQue quieres hacer:\n  1. Descargar audio de Youtube\n  2. Descarga los videos de una playlist de Youtube\n  3. Descargar un video de Youtube\n  : ")))
 
@@ -98,5 +105,9 @@ def main():
             return False
     
 if __name__ == "__main__":
-    instalar_api()
+
+    if instalar_api() == "yes":
+        from pytube import YouTube, Playlist
+        from moviepy.editor import VideoFileClip
+
     main()
