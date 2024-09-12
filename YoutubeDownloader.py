@@ -1,22 +1,6 @@
-import subprocess
-import sys
 import os
-
-# def instalar_api():
-#     try:
-#         # Intenta importar pytube para verificar si ya está instalado
-#         import pytube 
-#         import moviepy
-#     except ImportError as e:
-#         print(e)
-#         install = input("¿Quieres instalar la libreria?(y/n):")
-#         if install == "y" or "Y":
-#             subprocess.check_call([sys.executable, "-m", "pip", "install", "pytube"])
-#             subprocess.check_call([sys.executable, "-m", "pip", "install", "moviepy"])
-#             print("pytube instalado correctamente.")
-#         else:
-#             print("Para poder descargar algo necesitas descargar la libreria.")    
-#     return "yes"
+from pytube import YouTube, Playlist
+from moviepy import VideoFileClip
 
 def quitar_caracteres(title):
     name = title.replace('/', '')
@@ -105,9 +89,4 @@ def main():
             return False
     
 if __name__ == "__main__":
-
-    # if instalar_api() == "yes":
-    from pytube import YouTube, Playlist
-    from moviepy.editor import VideoFileClip
-
     main()
