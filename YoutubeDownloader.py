@@ -1,3 +1,5 @@
+# Este codigo es para mantenerlo en modo script, no tiene nada que ver con la interfaz grafica que se ejecuta
+
 import os
 from pytube import YouTube, Playlist
 from moviepy import VideoFileClip
