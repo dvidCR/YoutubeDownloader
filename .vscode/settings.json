@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./ejs/yt_dlp_ejs"
+    ]
+}
